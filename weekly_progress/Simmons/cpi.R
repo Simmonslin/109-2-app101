@@ -57,6 +57,21 @@ bind_cols(cpi_all[-c(1:12),1],cpi_all$年上漲率)
 cpi_all <- cpi_all[-c(474:485),]
 
 
+# 用cor.test() 得到 cor值
+
+
+cor_list <- vector(mode="list",length=7)
+
+
+for (i in 1:7){
+  
+  
+  cor_list[[i]] <- cor.test(unlist(cpi_all$年上漲率[,1]),unlist(cpi_all$年上漲率[,i+1]))
+  
+  
+}
+
+
 # 取出cor.test 中的 cor 值並整理成data.frame (第1大類 ~ 第7大類)
 
 unlist_cor_list <- unlist(cor_list)
