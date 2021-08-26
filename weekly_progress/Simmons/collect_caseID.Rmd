@@ -1,0 +1,503 @@
+---
+title: "Untitled"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+```{r}
+typeof(heritageData)
+
+heritageData$caseId[[2]]
+
+
+```
+
+
+
+
+
+
+```{r}
+
+lon_data <- list()
+
+length(heritageData[,"longitude"])
+
+for (i in seq_along(heritageData[,"longitude"])){
+  
+  lon_data[[i]] <- heritageData[,"longitude"][[i]] 
+  
+  
+}
+
+length(lon_data)
+
+ test_3 <-grep(sample(lon_data[[i]],1),heritageData[,"longitude"])
+ 
+test_3
+
+for (i in test_3){
+  
+  print(heritageData$caseId[[i]])
+  
+  
+}
+
+
+
+```
+
+
+```{r}
+list_tracks[[2]][["lon"]][[3]]
+```
+
+
+
+```{r}
+length(heritageData[["longitude"]])
+
+```
+
+
+```{r}
+
+list_tracks[[1]][["lon"]][[1]]
+
+
+heritageData[["longitude"]][2]
+
+seq_along(list_tracks[[1]][["lon"]])
+
+```
+
+
+
+`
+
+
+
+```{r}
+
+returnedGPS_tracks <- list()
+
+for (i in seq_along (gps_tracks_lon)){
+  
+  returnedGPS_tracks[[i]] <- c(lon=gps_tracks_lon[[i]],lat=gps_tracks_lat[[i]])
+  
+  
+  
+}
+
+ print(returnedGPS_tracks)
+ 
+```
+
+
+
+```{r}
+
+typeof(returnedGPS_tracks[[1]])
+
+returnedGPS_tracks[[1]]
+
+class(returnedGPS_tracks[[1]])
+```
+
+
+
+```{r}
+
+for (i in seq_along(returnedGPS_tracks)){
+  
+  
+ print (returnedGPS_tracks[[i]])
+  
+  
+}
+
+
+```
+
+
+
+```{r}
+
+
+View(list_tracks)
+
+
+```
+
+
+
+
+```{r}
+
+
+sp::spDistsN1(location,returnedGPS_tracks[[i]],longlat=T)
+
+
+```
+
+
+
+
+```{r}
+
+
+
+
+
+
+
+detect_spot <- function(returnedGPS_tracks ){
+  caseId_list <- list()
+  
+  for (i in seq_along(returnedGPS_tracks)){
+ 
+if(T %in% (sp::spDistsN1(location,returnedGPS_tracks[[i]],longlat=T) <= 0.1)){
+                
+                  
+                          caseId_list[[index]] = {
+                                     
+                            which.min(sp::spDistsN1(location,returnedGPS_tracks[[i]],longlat=T))-> index
+                                     
+                            heritageData$caseId[index]}
+                          
+                         
+                                   
+                        
+              
+         }
+    
+    
+   
+  
+  }
+  
+   
+   
+  
+   
+  return(caseId_list)
+}
+
+detect_spot(returnedGPS_tracks)
+ 
+ 
+
+
+```
+
+```{r}
+sample(1:5,1)
+```
+
+
+
+```{r}
+
+gpx_track_lon <- list_tracks[[sample(1:5,1)]][["lon"]]
+
+
+gpx_track_lat <- list_tracks[[sample(1:5,1)]][["lat"]]
+
+
+returnedGPS_tracks <- list()
+
+
+
+for (i in seq_along (gpx_track_lon)){
+  
+  returnedGPS_tracks[[i]] <- c(lon=gpx_track_lon[[i]],lat=gpx_track_lat[[i]])
+  
+}
+
+ 
+
+
+
+record_index <- list()
+
+for ( i in seq_along(returnedGPS_tracks)){
+
+ans_5 <- which.min(sp::spDistsN1(location,returnedGPS_tracks[[i]],longlat=T))
+
+record_index <- append(record_index,ans_5)
+
+
+}
+
+
+
+
+
+record_index
+
+
+
+```
+
+```{r}
+
+
+
+```
+
+
+
+
+```{r}
+
+random <- sample(1:5,1)
+
+
+gpx_track_lon <- list_tracks[[random]][["lon"]]
+
+
+gpx_track_lat <- list_tracks[[random]][["lat"]]
+
+
+returnedGPS_tracks <- list()
+
+
+
+for (i in seq_along (gpx_track_lon)){
+  
+  returnedGPS_tracks[[i]] <- c(lon=gpx_track_lon[[i]],lat=gpx_track_lat[[i]])
+  
+  
+  
+}
+
+
+returnedGPS_tracks
+
+
+
+
+ 
+ 
+```
+
+
+```{r}
+record_index <- list()
+
+for ( i in seq_along(returnedGPS_tracks)){
+
+ans_5 <- which.min(sp::spDistsN1(location,returnedGPS_tracks[[i]],longlat=T))
+
+
+
+record_index <- append(record_index,ans_5)
+
+
+}
+
+record_index
+
+```
+
+
+```{r}
+
+
+heritage$caseId <- list()
+
+for (i in seq_along(record_index)){
+  
+  
+ caseId <-  heritageData$caseId[[record_index[[i]]]]
+ 
+  heritage$caseId <- append(heritage$caseId,caseId)
+ 
+
+  
+}
+
+ heritage$caseId
+
+
+```
+
+
+
+
+```{r}
+
+library(lubridate)
+
+gps_tracks_lon = list_tracks[[1]][["lon"]]
+
+gps_tracks_lat = list_tracks[[1]][["lat"]]
+
+
+returnedGPS = c(lon=120.4407, lat=23.47734)
+heritage$validate_checkIn <- function(returnedGPS_tracks){
+         location <-{
+            lon  <-  heritageData$longitude
+            lat  <-  heritageData$latitude
+            lon[is.na(lon)] <- 0
+            lat[is.na(lat)] <- 0
+            matrix(lon) -> col1
+            matrix(lat) -> col2
+            cbind(col1,col2) 
+         }
+         
+         for (i in seq_along(returnedGPS_tracks))
+         if( T %in% (sp::spDistsN1(matrix(location[i,1:2],nrow=1),returnedGPS_tracks[[i]],longlat=T) <= 0.05)){
+                     caseId_list <- list(
+                          timestamp = time_start ,
+                          caseId = {
+                            which.min(sp::spDistsN1(matrix(location[i,1:2],nrow=1),returnedGPS,longlat=T)) ->index
+                                     
+                            heritageData$caseId[index]
+                                  
+                             }  ) }
+         
+           
+           
+           return(caseId_list)
+         
+}
+
+
+
+heritage$validate_checkIn(returnedGPS_tracks)
+
+
+
+
+```
+
+
+```{r}
+
+library(lubridate)
+
+gps_tracks_lon = list_tracks[[1]][["lon"]]
+
+gps_tracks_lat = list_tracks[[1]][["lat"]]
+
+returnedGPS_2 <- c(lon=gps_tracks_lon,lat=gps_tracks_lat)
+
+time_start <- format_ISO8601(now(),usetz = T)
+
+location <-{
+            lon  <-  heritageData$longitude
+            lat  <-  heritageData$latitude
+            lon[is.na(lon)] <- 0
+            lat[is.na(lat)] <- 0
+            matrix(lon) -> col1
+            matrix(lat) -> col2
+            cbind(col1,col2) 
+         }
+
+if(T %in% (sp::spDistsN1(location,returnedGPS_2,longlat=T) <= 0.05)){
+  
+  
+  
+}
+
+
+
+```
+
+```{r}
+sp::spDistsN1(location,returnedGPS_2,longlat=T)<=5
+```
+
+
+
+
+
+
+```{r}
+
+library(stringr)
+
+for (i in seq_along(list_tracks[[1]][["lon"]])){
+  
+  
+  grep(list_tracks[[1]][["lon"]][[i]],heritageData[["longitude"]])
+  
+  print(grep(list_tracks[[1]][["lon"]][[i]],heritageData[["longitude"]]))
+  
+}
+
+
+
+
+
+```
+
+
+```{r}
+grep(list_tracks[[1]][["lon"]][[100]],heritageData[["longitude"]])
+
+
+
+
+
+```
+
+
+```{r}
+
+
+sort(list_tracks[[1]][["lon"]],decreasing=FALSE)
+
+length(list_tracks[[1]][["lon"]])
+
+
+```
+
+```{r}
+sort(heritageData[["longitude"]])
+```
+
+
+
+
+```{r}
+list_tracks[[1]][,"lon"][[169]]
+
+
+```
+
+
+
+
+
+```{r} 
+length(list_tracks[[1]][,"lon"])
+
+list_tracks[[1]][,"lon"][[169]]
+```
+
